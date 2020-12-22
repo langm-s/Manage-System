@@ -30,7 +30,8 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-
+import {login} from '../api/api'
+import axios from 'axios'
 export default {
 //import引入的组件需要注入到对象中才能使用
 components: {},
@@ -65,7 +66,34 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
- 
+  handleLogin: function (loginForm) {
+    this.$refs[loginForm].validate(async (valid) => {
+      if (valid) {
+       let result = await login({
+            user_name: this.form.username,
+            password: this.form.password,
+       });
+       console.log(result);
+        if (result.status === 1) {
+          this.$message({
+          type: "success",
+          message: "登陆成功",
+        })
+        this.$router.push("dashboard")
+        } else {
+          this.$message({
+            message: "登录失败",
+            type: "warning",
+          });
+        }
+      } else {
+        this.$message({
+          type: "warning",
+          message: "校验没有成功",
+        });
+      }
+    });
+  },
 },
 //生命周期 - 创建完成（可以访问当前this实例）
 created() {
