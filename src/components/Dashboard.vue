@@ -83,7 +83,15 @@ export default {
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
-    this.defaultActive=location.hash.slice(2)||"searchdrug";
+    this.defaultActive=location.hash.split("/")[1];
+    if (location.hash.slice(2)=="adddruglist"||location.hash.slice(2)=="adddrugnews") {
+       this.defaultActive="addinventory"
+    } 
+     if (location.hash.slice(2)=="drugtable") {
+       this.defaultActive="searchinventory"
+    }
+    
+    
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前

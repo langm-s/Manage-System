@@ -12,3 +12,8 @@ export const login = (params) => {
 export const getInventory = () => {
     return myaxios.get("273802/%20inventory").catch(err => console.log(err));
 }
+
+// 药品添加库存接口
+export const getAddDrug = () => {
+    return myaxios.get("273802/stock").catch(err => console.log(err));
+}

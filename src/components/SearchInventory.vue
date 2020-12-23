@@ -1,4 +1,4 @@
-<!--  -->
+<!-- 库存信息查询 -->
 <template>
   <div class="app">
     <div class="searchinventory">
@@ -77,18 +77,18 @@ export default {
       console.log(this.newdrug);
     },
     handleSearch: function () {
-      if (this.newdrug === this.$refs["inputRef"].value) {
+      // if (this.newdrug === this.$refs["inputRef"].value) {
         this.$router.push("drugtable");
         this.$message({
           type: "success",
           message: "这个药品还有库存哟",
-        });
-      } else {
-        this.$message({
-          type: "warning",
-          message: "没有这个药品哟，有可能没库存了",
-        });
-      }
+        // });
+      // } else {
+      //   this.$message({
+      //     type: "warning",
+      //     message: "没有这个药品哟，有可能没库存了",
+      //   });
+      })
     },
   },
   //生命周期 - 创建完成（可以访问当前this实例）

@@ -4,12 +4,14 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+    state: {
+        searchDrug: []
+    },
+    mutations: { //同步操作
+        mapSearch: function(state, payload) {
+            state.searchDrug = payload.drugData
+        }
+    },
+    actions: {},
+    modules: {}
 })

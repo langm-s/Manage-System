@@ -55,10 +55,19 @@ const routes = [{
             component: () =>
                 import ("../components/LookAllInventory"),
         }, {
-            path: "/lookallinventory",
+            path: "/addinventory",
             component: () =>
-                import ("../components/LookAllInventory"),
-        }, ]
+                import ("../components/AddInventory"),
+
+        }, {
+            path: "/adddruglist",
+            component: () =>
+                import ("../components/AddDrugList")
+        }, {
+            path: "/adddrugnews",
+            component: () =>
+                import ("../components/AddDrugNews")
+        }]
     },
 ]
 
