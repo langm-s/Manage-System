@@ -115,6 +115,7 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 .mylogin {
   padding: 150px;
   height: 100vh;
+  background-color: #f1f1f1;
   h1{
     text-align: center;
   }
