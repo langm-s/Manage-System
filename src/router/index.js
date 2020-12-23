@@ -43,61 +43,23 @@ const routes = [{
         component: () =>
             import ( /* webpackChunkName: "dashboard" */ "../components/Dashboard"),
         children: [{
-            path: '',
-            component: () =>
-                import ("../components/SearchDrug"),
-        }, {
-            path: '/lookdrug',
-            component: () =>
-                import ("../components/LookDrug"),
-        }, {
-            path: '/adddrug',
-            component: () =>
-                import ("../components/AdddDug"),
-        }]
-    }, {
-        path: "/purchasedata",
-        component: () =>
-            import ( /* webpackChunkName: "purchasedata" */ "../components/PurchaseData"),
-        children: [{
-            path: "/checkdrug",
-            component: () =>
-                import ("../components/CheckDrug"),
-        }, {
-            path: "/lookrecords",
-            component: () =>
-                import ("../components/LookRecords"),
-        }, {
-            path: "/suppliermannage",
-            component: () =>
-                import ("../components/SupplierMannage"),
-        }, ]
-    }, {
-        path: "/druginventory",
-        component: () =>
-            import ( /* webpackChunkName: "druginventory" */ "../components/SupplierMannage"),
-        children: [{
-            path: "/searchinventory",
+            path: '/searchinventory',
             component: () =>
                 import ("../components/SearchInventory"),
         }, {
+            path: "/drugtable",
+            component: () =>
+                import ("../components/DrugTable"),
+        }, {
             path: "/lookallinventory",
             component: () =>
-                import ("../components/LookallInventory"),
+                import ("../components/LookAllInventory"),
         }, {
-            path: "/addinventory",
+            path: "/lookallinventory",
             component: () =>
-                import ("../components/AddInventory"),
+                import ("../components/LookAllInventory"),
         }, ]
-    }, {
-        path: "/warninventory",
-        component: () =>
-            import ( /* webpackChunkName: "warninventory" */ "../components/WarnInventory"),
-    }, {
-        path: "/salerecordss",
-        component: () =>
-            import ( /* webpackChunkName: "salerecordss" */ "../components/SaleRecordss"),
-    }
+    },
 ]
 
 const router = new VueRouter({
