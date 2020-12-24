@@ -8,7 +8,8 @@ let originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
     return originalPush.call(this, location).catch(() => {});
 };
-const routes = [{
+const routes = [
+    {
         path: '/',
         name: 'Login',
         component: Login
@@ -30,12 +31,18 @@ const routes = [{
             path: '/drug-looking',
             component: () =>
                 import ("../components/DrugLooking")
-        }]
+        },
+        {
+            path: '/salerecordss',
+            component: () =>
+                import ("../components/DrugSell")
+        }
+    ]
     }
 ]
 
 const router = new VueRouter({
-    mode: '',
+    mode: 'history',
     base: process.env.BASE_URL,
     routes
 })
