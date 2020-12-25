@@ -25,30 +25,53 @@
                 <i class="el-icon-document"></i>
                 <span>药品基础信息</span>
               </template>
-              <el-menu-item index="searchdrug"><i class="el-icon-search"></i>搜索药品信息</el-menu-item>
-              <el-menu-item index="lookdrug"><i class="el-icon-view"></i>查看药品信息</el-menu-item>
-              <el-menu-item index="adddrug"><i class="el-icon-document-add"></i>添加药品信息</el-menu-item>
+              <el-menu-item index="dashboard"
+                ><i class="el-icon-search"></i>搜索药品信息</el-menu-item
+              >
+              <el-menu-item index="lookdrug"
+                ><i class="el-icon-view"></i>查看药品信息</el-menu-item
+              >
+              <el-menu-item index="adddrug"
+                ><i class="el-icon-document-add"></i>添加药品信息</el-menu-item
+              >
             </el-submenu>
             <el-submenu index="purchasedata">
               <template slot="title">
                 <i class="el-icon-s-operation"></i>
                 <span>进货信息</span>
               </template>
-              <el-menu-item index="checkdrugIn"><i class="el-icon-search"></i>药品审核入库</el-menu-item>
-              <el-menu-item index="lookrecords"><i class="el-icon-view"></i>查看供货记录</el-menu-item>
-              <el-menu-item index="suppliermannage"><i class="el-icon-user-solid"></i>供货商管理</el-menu-item>
+              <el-menu-item index="checkdrugIn"
+                ><i class="el-icon-search"></i>药品审核入库</el-menu-item
+              >
+              <el-menu-item index="lookrecords"
+                ><i class="el-icon-view"></i>查看供货记录</el-menu-item
+              >
+              <el-menu-item index="suppliermannage"
+                ><i class="el-icon-user-solid"></i>供货商管理</el-menu-item
+              >
             </el-submenu>
             <el-submenu index="druginventory">
               <template slot="title">
                 <i class="el-icon-tickets"></i>
                 <span>药品库存信息</span>
               </template>
-              <el-menu-item index="searchinventory"><i class="el-icon-search"></i>库存药品查询</el-menu-item>
-              <el-menu-item index="lookallinventory"><i class="el-icon-view"></i>查看所有库存</el-menu-item>
-              <el-menu-item index="addinventory"><i class="el-icon-circle-plus-outline"></i>新增库存药品</el-menu-item>
+              <el-menu-item index="searchinventory"
+                ><i class="el-icon-search"></i>库存药品查询</el-menu-item
+              >
+              <el-menu-item index="lookallinventory"
+                ><i class="el-icon-view"></i>查看所有库存</el-menu-item
+              >
+              <el-menu-item index="addinventory"
+                ><i class="el-icon-circle-plus-outline"></i
+                >新增库存药品</el-menu-item
+              >
             </el-submenu>
-            <el-menu-item index="warninventory"><i class="el-icon-warning"></i>库存预警</el-menu-item>
-            <el-menu-item index="salerecordss"><i class="el-icon-s-order"></i>销售记录</el-menu-item>
+            <el-menu-item index="warninventory"
+              ><i class="el-icon-warning"></i>库存预警</el-menu-item
+            >
+            <el-menu-item index="salerecordss"
+              ><i class="el-icon-s-order"></i>销售记录</el-menu-item
+            >
           </el-menu>
         </el-col>
         <el-col :span="20" class="myadmin-dashboard-col">
@@ -62,15 +85,18 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import {getRecordMessage} from "@/api/api"
-import { getDrugMessage } from '../api/api';
+//import DrugSell from './components/DrugSell.vue'
+import {getRecordMessage} from '../api/api'
 export default {
   //import引入的组件需要注入到对象中才能使用
-  components: {},
+ name:'App',
+ components: {
+      
+  },
   data() {
     //这里存放数据
     return {
-      defaultActive: "searchdrug",
+      defaultActive: "dashboard",
     };
   },
   //监听属性 类似于data概念
@@ -83,18 +109,20 @@ export default {
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
   async mounted() {
-    // 在进入主页的时候就在store中保存订单记录
     let result = await getRecordMessage();
-     /* 在store中加载原来的进货订单 */
-    this.$store.commit('purchaseDrug/saveprevRecord',{
+    this.$store.commit("purchaseDrug/saveprevRecord",{
       allRecord:result.data,
     });
+    if (location.hash.slice(2) == "drug_details") {
+      this.defaultActive = "dashboard";
+    } 
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
   beforeUpdate() {}, //生命周期 - 更新之前
   updated() {
-    this.defaultActive = location.hash.split("/")[1] || "searchdrug";
+    this.defaultActive = location.hash.slice(2) || "dashboard";
+    
   }, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
@@ -115,13 +143,11 @@ export default {
   .dashboard-left {
     height: 100vh;
     .title {
-      height: 80px;
+      height: 120px;
+      line-height: 120px;
       margin: 30px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: #fff;
       h1 {
-        color: #ffffff;
         text-align: center;
       }
       img {

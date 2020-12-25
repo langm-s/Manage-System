@@ -103,11 +103,11 @@ created() {
 //生命周期 - 挂载完成（可以访问DOM元素）
 async mounted() {
   // 从store中获取最新更新的订单记录
-    this.recordData = this.$store.state.purchaseDrug.allRecord;
+  console.log(this.$store.state.purchaseDrug.allRecord);
+  this.recordData = this.$store.state.purchaseDrug.allRecord;
   // 计算分页数据长度
   this.totalItem = this.recordData.length;
   // console.log(this.recordData);
-  // console.log(this.$store.state.purchaseDrug.allRecord);
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前
