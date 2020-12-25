@@ -1,33 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Login from '@/views/Login.vue'
-import Login from "../views/Login.vue"
-Vue.use(VueRouter);
-/* 避免 ) NavigationDuplicated: Avoided redundant navigation to current location: "/dashboard" */
-let originalPush = VueRouter.prototype.push;
-// VueRouter.prototype.push = function (location,onComplete,onAbort) {
-//   return originalPush.call(this, location,onComplete,onAbort).catch(() => {});
-// };
+import Login from '@/views/Login'
+Vue.use(VueRouter)
+
 /* 
-  VueRouter.prototype.push = function push (location, onComplete, onAbort) {
-      var this$1 = this;
-
-    // $flow-disable-line
-    if (!onComplete && !onAbort && typeof Promise !== 'undefined') {
-      return new Promise(function (resolve, reject) {
-        this$1.history.push(location, resolve, reject);
-      })
-    } else {
-      this.history.push(location, onComplete, onAbort);
-    }
-  };
-
-
+  重写VueRouter中的push方法，避免多次重定位报错
 */
-
+let originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
-    return originalPush.call(this, location).catch(() => {});
-};
+    return originalPush.call(this, location).catch(err => {})
+}
+
 const routes = [{
         path: '/',
         name: 'Login',
@@ -36,12 +19,9 @@ const routes = [{
     {
         path: '/dashboard',
         name: 'Dashboard',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        // component: () =>
         component: () =>
             import ( /* webpackChunkName: "dashboard" */ "../components/Dashboard"),
+
         children: [
             /* 
         基础信息
@@ -144,6 +124,7 @@ const routes = [{
         ]
     },
 ]
+
 
 const router = new VueRouter({
     mode: 'hash',

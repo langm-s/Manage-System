@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
     /* 引入模块 */
 import PurchaseDrug from './modules/purchaseDrug'
