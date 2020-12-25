@@ -27,9 +27,18 @@ const routes = [{
             component: () =>
                 import ("../components/DrugsSearch")
         }, {
-            path: '/drug-looking',
+            path: '/drug_details',
+            component: () =>
+                import ("../components/DrugDetails")
+        }, {
+            path: '/lookdrug',
             component: () =>
                 import ("../components/DrugLooking")
+
+        }, {
+            path: '/adddrug',
+            component: () =>
+                import ("../components/AddDrugs")
         }]
     }
 ]
@@ -39,5 +48,13 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 })
-
+router.beforeEach(function(to, from, next) {
+    // console.log("全局前置导航守卫");
+    let is_login = localStorage.getItem("is_login");
+    if (is_login || to.path === "/") {
+        next();
+    } else {
+        next("/"); // 否则情况下跳转登陆页面
+    }
+});
 export default router

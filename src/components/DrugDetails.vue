@@ -1,7 +1,7 @@
 <!--  -->
 <template>
-  <div class="lookdrugs">
-    <h1>药品基础信息</h1>
+  <div class="drug-details">
+    <h1>药品详情</h1>
     <el-table :data="filterData" border style="width: 100%" height="90vh">
       <el-table-column prop="drugName" label="药品名称" width="180">
       </el-table-column>
@@ -18,23 +18,12 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.$index, tableData)"
+            @click="handleDelete(scope.$index, filterData)"
             >删除</el-button
           >
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="pageSizes"
-      :page-size="pageSize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="total"
-    >
-    </el-pagination>
-
     <!-- 弹框编辑信息 -->
     <el-dialog
       title="修改药品信息"
@@ -68,9 +57,8 @@
           <el-input v-model="ruleForm.barCode"></el-input>
         </el-form-item>
         <el-form-item size="large" right>
-          <el-button type="primary" @click="onSubmit('form')"
-            >确定</el-button>
-          <el-button @click="editdialogVisible = false">取消</el-button> 
+          <el-button type="primary" @click="onSubmit('form')">确定</el-button>
+          <el-button @click="editdialogVisible = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -80,7 +68,6 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import { drugsSearch } from "../api/api";
 
 export default {
   //import引入的组件需要注入到对象中才能使用
@@ -89,21 +76,7 @@ export default {
     //这里存放数据
     return {
       editdialogVisible: false,
-      tableData: [],
-      total: 0, // 总的注册用户数
-      pageSize: 10,
-      currentPage: 1,
-      pageSizes: [10, 15, 20, 25],
-      ruleForm: {
-        // name: "",
-        // region: "",
-        // factory: "",
-        // note: "",
-        // location: "",
-        // unit: "",
-        // specification: "",
-        // barCode: "",
-      },
+      filterData: [],
       rules: {
         durgName: [
           { required: true, message: "药品名称不能为空", trigger: "blur" },
@@ -119,18 +92,11 @@ export default {
         ],
         barCode: [{ required: true, message: "请输入条形码", trigger: "blur" }],
       },
+      ruleForm: [],
     };
   },
   //监听属性 类似于data概念
-  computed: {
-    filterData: function () {
-      let filterData = this.tableData.slice(
-        (this.currentPage - 1) * this.pageSize,
-        this.currentPage * this.pageSize
-      );
-      return filterData;
-    },
-  },
+  computed: {},
   //监控data中的数据变化
   watch: {},
   //方法集合
@@ -158,53 +124,33 @@ export default {
       // scope.row => 一行的信息
       this.editdialogVisible = true;
       this.ruleForm = scope.row;
-      console.log(scope.row);
-    },
+      console.log(scope.row);    },
     handleDelete: function (index, row) {
-      // console.log("删除");
+      console.log("删除");
       row.splice(index, 1);
-      this.total--;
       this.$message({
         type: "success",
         message: "删除成功！",
       });
     },
-    handleSizeChange: function (pageSize) {
-      this.pageSize = pageSize;
-      // console.log(pageSize);
-      this.currentPage = 1;
-    },
-    handleCurrentChange(currentPage) {
-      console.log("改变页码");
-      this.currentPage = currentPage;
-    },
   },
-
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {
-    /* let flag= this.$store.state.addDrug.allDrugs.lenth;
-    if (flag) {
-      this.tableData = this.$store.state.addDrug.allDrugs;
-    };
-   
-  }, */
-  },
+  created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
-  async mounted() {
-    //判断tableData的来源
-    let result = await drugsSearch();
-    // this.tableData = result.data;
-    if (this.$store.state.addDrug.allDrugs.length === 0) {
-      this.$store.commit("addDrug/savePrevAllDrug", {
-        allDrugs: result.data,
+  mounted() {
+    this.filterData = this.$store.state.search.newData;
+    if (this.filterData.length === 0) {
+      this.$message({
+        type: "warning",
+        message: "未查询到此类药品，请进货补充药品！",
       });
-      // console.log(result.data);
-      //
-      this.tableData = result.data;
     } else {
-      this.tableData = this.$store.state.addDrug.allDrugs;
+      this.$message({
+        type: "success",
+        message: "查询成功！",
+      });
     }
-    this.total = this.tableData.length;
+    console.log(this.filterData);
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
@@ -216,10 +162,10 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-.lookdrugs {
+.drug-details {
   h1 {
     text-align: center;
-    margin-top: 10px;
+    margin: 15px auto;
   }
 }
 </style>

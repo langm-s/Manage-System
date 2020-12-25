@@ -79,7 +79,8 @@ methods: {
           type: "success",
           message: "登陆成功",
         })
-        this.$router.push("dashboard")
+        localStorage.setItem("is_login","true");
+        this.$router.push("dashboard");
         } else {
           this.$message({
             message: "登录失败",
