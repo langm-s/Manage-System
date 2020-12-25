@@ -49,7 +49,6 @@ export default {
   methods: {
     handleSearch: function () {
       if(this.state){
-        console.log("跳转到药品详情页");
       this.$store.commit("search/mysearch",{
         filterResult:this.filterResult
       })

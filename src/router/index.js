@@ -3,75 +3,108 @@ import VueRouter from 'vue-router'
 import Login from '@/views/Login'
 Vue.use(VueRouter)
 
-/* 避免 ) NavigationDuplicated: Avoided redundant navigation to current location: "/dashboard" */
+/* 
+  重写VueRouter中的push方法，避免多次重定位报错
+*/
 let originalPush = VueRouter.prototype.push;
-VueRouter.prototype.push = function(location) {
-    return originalPush.call(this, location).catch(() => {});
-};
-const routes = [{
-        path: '/',
-        name: 'Login',
-        component: Login
-    },
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        // component: () =>
+VueRouter.prototype.push = function (location) {
+  return originalPush.call(this, location).catch(err => { })
+}
+
+const routes = [
+  {
+    path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import( /* webpackChunkName: "dashboard" */ "../components/Dashboard"),
+    children: [
+      /* 
+        基础信息
+      */
+      {
+        path: '',
         component: () =>
-            import ( /* webpackChunkName: "dashboard" */ "../components/Dashboard"),
-        children: [{
-            path: '',
-            component: () =>
-                import ("../components/DrugsSearch")
-        }, {
-            path: '/drug_details',
-            component: () =>
-                import ("../components/DrugDetails")
-        }, {
-            path: '/lookdrug',
-            component: () =>
-                import ("../components/DrugLooking")
+          import("../components/DrugsSearch")
+      }, {
+        path: '/drug_details',
+        component: () =>
+          import("../components/DrugDetails")
+      }, {
+        path: '/lookdrug',
+        component: () =>
+          import("../components/DrugLooking")
 
-        }, {
-            path: '/adddrug',
-            component: () =>
-                import ("../components/AddDrugs")
-        }, {
-            path: '/salerecordss',
-            component: () =>
-                import ("../components/DrugSell")
-<<<<<<< HEAD
-        },{
-            path:'/warninventory',
-            component: () =>
-                import ("../components/DrugWarning")
-        }
+      }, {
+        path: '/adddrug',
+        component: () =>
+          import("../components/AddDrugs")
+      },
+
+
+      /* 
+        * 这里是进货信息模块路由分配
+      */
+      {
+        path: "/checkdrugIn",
+        component: () => import("@/components/purchaseDrug/PurchaseDrug"),
+      }, {
+        path: "/lookrecords",
+        component: () => import("@/components/purchaseDrug/PurchaseRecord"),
+      }, {
+        path: "/suppliermannage",
+        component: () => import("@/components/purchaseDrug/Suppliers"),
+      }, {
+        path: "/searchAllDrug",
+        component: () => import("@/components/purchaseDrug/AddSearchList"),
+      }, {
+        path: "/add_drug_msg",
+        component: () => import("@/components/purchaseDrug/AddRecordMessage"),
+      },
+
+      /* 
+          销售记录
+       */
+      {
+        path: '/salerecordss',
+        component: () =>
+          import("../components/DrugSell")
+      },
+      // 销售预警
+      {
+        path: '/salerecordss',
+          component: () =>
+            import("../components/DrugSell")
+      }, {
+        path: '/warninventory',
+          component: () =>
+            import("../components/DrugWarning")
+      }
+
     ]
-    }
-=======
-        }]
-    },
+  },
+];
 
->>>>>>> 5480e68b16fb827e58ac0cc0c59fadcf359369f6
-]
+
+
 
 
 
 const router = new VueRouter({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes
+  mode: 'hash',
+  base: process.env.BASE_URL,
+  routes
 })
-router.beforeEach(function(to, from, next) {
-    // console.log("全局前置导航守卫");
-    let is_login = localStorage.getItem("is_login");
-    if (is_login || to.path === "/") {
-        next();
-    } else {
-        next("/"); // 否则情况下跳转登陆页面
-    }
+router.beforeEach(function (to, from, next) {
+  // console.log("全局前置导航守卫");
+  let is_login = localStorage.getItem("is_login");
+  if (is_login || to.path === "/") {
+    next();
+  } else {
+    next("/"); // 否则情况下跳转登陆页面
+  }
 });
 export default router

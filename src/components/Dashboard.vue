@@ -12,9 +12,8 @@
             class="dashboard-left"
             router
           >
-            <div class="logo">
-              <img src="../assets/logo.png" alt="" />
-              <h1>药店销售管理系统</h1>
+            <div class="title">
+              <h1>药品仓库管理系统</h1>
             </div>
             <!-- <el-menu-item index="dashboard">
             <i class="el-icon-menu"></i>
@@ -41,7 +40,7 @@
                 <i class="el-icon-s-operation"></i>
                 <span>进货信息</span>
               </template>
-              <el-menu-item index="checkdrug"
+              <el-menu-item index="checkdrugIn"
                 ><i class="el-icon-search"></i>药品审核入库</el-menu-item
               >
               <el-menu-item index="lookrecords"
@@ -87,7 +86,7 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 //import DrugSell from './components/DrugSell.vue'
-
+import {getRecordMessage} from '../api/api'
 export default {
   //import引入的组件需要注入到对象中才能使用
  name:'App',
@@ -109,8 +108,11 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
-  mounted() {
-    this.defaultActive = location.hash.slice(2) ;
+  async mounted() {
+    let result = await getRecordMessage();
+    this.$store.commit("purchaseDrug/saveprevRecord",{
+      allRecord:result.data,
+    });
     if (location.hash.slice(2) == "drug_details") {
       this.defaultActive = "dashboard";
     } 
@@ -120,9 +122,7 @@ export default {
   beforeUpdate() {}, //生命周期 - 更新之前
   updated() {
     this.defaultActive = location.hash.slice(2) || "dashboard";
-    if (location.hash.slice(2) == "drug_details") {
-      this.defaultActive = "dashboard";
-    } 
+    
   }, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
@@ -142,12 +142,11 @@ export default {
   }
   .dashboard-left {
     height: 100vh;
-    .logo {
-      height: 200px;
+    .title {
+      height: 120px;
+      line-height: 120px;
       margin: 30px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: #fff;
       h1 {
         text-align: center;
       }
