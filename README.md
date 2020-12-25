@@ -1,24 +1,13 @@
-# mysystem
+# 药品销售管理系统
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 药品基础信息模块
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 进货信息模块
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 药品库存信息
+
+## 库存预警
+
+## 销售记录

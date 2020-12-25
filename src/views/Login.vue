@@ -73,12 +73,13 @@ methods: {
             user_name: this.form.username,
             password: this.form.password,
        });
-       console.log(result);
+      //  console.log(result);
         if (result.status === 1) {
           this.$message({
-          type: "success",
-          message: "登陆成功",
-        })
+            type: "success",
+            message: "登陆成功",
+          });
+          this.$router.push("dashboard");
         } else {
           this.$message({
             message: "登录失败",
