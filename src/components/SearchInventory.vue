@@ -44,6 +44,7 @@ export default {
       result: [],
       flag: false,
       newdrug: "",
+      filterResult:[],
       sevenDays: [], // 最近七天的数据的日期 ['2020-12-15'，'2020-12-16',......'2020-12-21']
       // sevenDaysDatas[0] 新增注册用户 7天数据 =>
       // sevenDaysDatas[1] 新增订单 7天数据  =>
@@ -69,6 +70,7 @@ export default {
         }
       });
       console.log(filterResult); //这个输出根据输入筛选后的匹配项的结果
+      this.filterResult=filterResult
       cd(filterResult); //需要这样一个回调，将过滤好的数据渲染出来
     },
     handleSelect: function (value) {
@@ -78,7 +80,11 @@ export default {
     },
     handleSearch: function () {
       // if (this.newdrug === this.$refs["inputRef"].value) {
+        this.$store.commit("searchInventory",{
+         searchResult: this.filterResult
+        })
         this.$router.push("drugtable");
+
         this.$message({
           type: "success",
           message: "这个药品还有库存哟",

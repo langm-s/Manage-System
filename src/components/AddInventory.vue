@@ -66,9 +66,9 @@ export default {
         // 还是全部输出所有店铺数据，还没有进行过滤
         // console.log(v);
         // console.log(v.value);//各个店铺的名字
-        v.value = v.drugName;
-        if (v.drugName.includes(queryString)) {
-          return { value: v.drugName };
+        v.value = v.data;
+        if (v.data.includes(queryString)) {
+          return { value: v.data };
         }
       });
       this.drugData=filterResult
@@ -76,14 +76,14 @@ export default {
       cd(filterResult); //需要这样一个回调，将过滤好的数据渲染出来
     },
     handleSelect: function (value) {
-      console.log("选的药是：", value.drugName);
-      this.newdrug = value.drugName;
+      console.log("选的药是：", value.data);
+      this.newdrug = value.data;
       console.log(this.newdrug);
     },
     handleSearch: function () {
 
 
-      if (this.newdrug === this.$refs["inputRef"].value) {
+    //   if (this.newdrug === this.$refs["inputRef"].value) {
 
           this.$store.commit('mapSearch',{
               drugData:this.drugData
@@ -94,14 +94,15 @@ export default {
         this.$message({
           type: "success",
           message: "这个药找到了",
-        });
-      } else {
-        this.$message({
-          type: "warning",
-          message: "没有这个药品哟",
-        });
-      }
-    },
+    //     });
+    //   } else {
+    //     this.$message({
+    //       type: "warning",
+    //       message: "没有这个药品哟",
+    //     });
+    //   }
+    })
+   }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
