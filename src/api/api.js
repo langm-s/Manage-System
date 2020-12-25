@@ -36,5 +36,11 @@ export const getSupplier = () => {
 // http://rap2api.taobao.org/app/mock/273802/example/1608707486032
 export const drugSell = () => {
   return myaxios.get('273802/example/1608707486032')
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
+}
+//库存预警接口
+//http://rap2api.taobao.org/app/mock/273802/inventory%20/004
+export const drugWarning = () => {
+  return myaxios.get('273802/inventory%20/004')
+      .catch(err => console.log(err))
 }

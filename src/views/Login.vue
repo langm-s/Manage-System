@@ -2,7 +2,7 @@
 <template>
 <div class=''>
   <div class="mylogin">
-    <h1>药品销售管理系统</h1>
+    <h1>药品仓库管理系统</h1>
     <div class="login-area">
       <div class="login-form">
         <el-form :model="form" ref="loginForm" :rules="rules" label-width="80px">

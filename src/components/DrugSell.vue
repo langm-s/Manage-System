@@ -3,6 +3,7 @@
 <div class="App">
   <el-table
     :data="tableData"
+    border
     style="width: 100%"
     max-height="952">
     <el-table-column
@@ -14,7 +15,7 @@
     <el-table-column
       prop="factory"
       label="厂商"
-      width="150">
+      width="250">
     </el-table-column>
     <el-table-column
       prop="sellingPrice"
@@ -44,7 +45,7 @@
     <el-table-column
       prop="specification"
       label="规格"
-      width="120">
+      width="160">
     </el-table-column>
     <el-table-column
       prop="number"
@@ -59,17 +60,16 @@
     <el-table-column
       prop="deal_time"
       label="交易时间"
-      width="180">
+      width="200">
     </el-table-column>
     <el-table-column
       fixed="right"
-      label="操作"
-      width="120">
+      label="操作">
       <template slot-scope="scope">
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData)"
-          type="text"
-          size="small">
+          type="danger"
+          size="middle">
           移除
         </el-button>
       </template>

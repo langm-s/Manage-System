@@ -25,59 +25,69 @@ const routes = [
       /* 
         基础信息
       */
-     {
-      path: '',
-      component: () =>
-        import("../components/DrugsSearch")
-    }, {
-      path: '/drug_details',
-      component: () =>
-        import("../components/DrugDetails")
-    }, {
-      path: '/lookdrug',
-      component: () =>
-        import("../components/DrugLooking")
+      {
+        path: '',
+        component: () =>
+          import("../components/DrugsSearch")
+      }, {
+        path: '/drug_details',
+        component: () =>
+          import("../components/DrugDetails")
+      }, {
+        path: '/lookdrug',
+        component: () =>
+          import("../components/DrugLooking")
 
-    }, {
-      path: '/adddrug',
-      component: () =>
-        import("../components/AddDrugs")
-    }, 
+      }, {
+        path: '/adddrug',
+        component: () =>
+          import("../components/AddDrugs")
+      },
 
-    
+
       /* 
         * 这里是进货信息模块路由分配
       */
-     {
-      path: "/checkdrugIn",
-      component: () => import("@/components/purchaseDrug/PurchaseDrug"),
-    }, {
-      path: "/lookrecords",
-      component: () => import("@/components/purchaseDrug/PurchaseRecord"),
-    }, {
-      path: "/suppliermannage",
-      component: () => import("@/components/purchaseDrug/Suppliers"),
-    }, {
-      path: "/searchAllDrug",
-      component: () => import("@/components/purchaseDrug/AddSearchList"),
-    }, {
-      path: "/add_drug_msg",
-      component: () => import("@/components/purchaseDrug/AddRecordMessage"),
-    },
+      {
+        path: "/checkdrugIn",
+        component: () => import("@/components/purchaseDrug/PurchaseDrug"),
+      }, {
+        path: "/lookrecords",
+        component: () => import("@/components/purchaseDrug/PurchaseRecord"),
+      }, {
+        path: "/suppliermannage",
+        component: () => import("@/components/purchaseDrug/Suppliers"),
+      }, {
+        path: "/searchAllDrug",
+        component: () => import("@/components/purchaseDrug/AddSearchList"),
+      }, {
+        path: "/add_drug_msg",
+        component: () => import("@/components/purchaseDrug/AddRecordMessage"),
+      },
 
-    /* 
-        销售记录
-     */
-       {
+      /* 
+          销售记录
+       */
+      {
         path: '/salerecordss',
         component: () =>
           import("../components/DrugSell")
+      },
+      // 销售预警
+      {
+        path: '/salerecordss',
+          component: () =>
+            import("../components/DrugSell")
+      }, {
+        path: '/warninventory',
+          component: () =>
+            import("../components/DrugWarning")
       }
-
 
     ]
   },
 ];
+
 
 
 
