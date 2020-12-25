@@ -39,12 +39,19 @@ const routes = [{
             path: '/adddrug',
             component: () =>
                 import ("../components/AddDrugs")
+        }, {
+            path: '/salerecordss',
+            component: () =>
+                import ("../components/DrugSell")
         }]
-    }
+    },
+
 ]
 
+
+
 const router = new VueRouter({
-    mode: '',
+    mode: 'history',
     base: process.env.BASE_URL,
     routes
 })
