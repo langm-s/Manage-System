@@ -36,6 +36,10 @@ const routes = [
             path: '/salerecordss',
             component: () =>
                 import ("../components/DrugSell")
+        },{
+            path:'/warninventory',
+            component: () =>
+                import ("../components/DrugWarning")
         }
     ]
     }
