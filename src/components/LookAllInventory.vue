@@ -1,8 +1,7 @@
 <!-- 查看所有库存 -->
 <template>
-  <div class="allinventory">
-   
-    
+<div class="app">
+  <div class="allinventory">   
     <div class="topnews"> 查看所有的库存</div>
       <el-table :data="tableData" border style="width: 100%" max-height="750px">
         <el-table-column label="药品名称" width="180">
@@ -164,13 +163,13 @@
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-sizes="pageSizes"
-          :page-size="10"
+          :page-size="15"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
         >
         </el-pagination>
       </div>
-  </div>
+  </div></div>
 </template>
 
 <script>
@@ -185,7 +184,7 @@ export default {
     return {
       resultData: [],
       form: {},
-      pageSize: 5,
+      pageSize: 15,
       total: 0,
       currentPage: 1,
       pageSizes: [5, 10, 15, 25],
@@ -294,34 +293,16 @@ export default {
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 };
 
-//  <el-table-column label="药品名称" width="240" prop="data">
-//       </el-table-column>
-//       <el-table-column label="厂商" width="240" prop="factory">
-//       </el-table-column>
-//       <el-table-column label="进价" width="80" prop="purchasing_Price">
-//       </el-table-column>
-//       <el-table-column label="销售价格" width="80" prop="sale_Price">
-//       </el-table-column>
-//       <el-table-column label="生产日期" width="100" prop="date_of_manufacture">
-//       </el-table-column>
-//       <el-table-column label="有效日期" width="100" prop="effective_date">
-//       </el-table-column>
-//       <el-table-column label="批号" width="100" prop="barCode">
-//       </el-table-column>
-//       <el-table-column label="备注" width="80" prop="note"> </el-table-column>
-//       <el-table-column label="药品位置信息" width="140" prop="location">
-//       </el-table-column>
-//       <el-table-column label="库存" width="50" prop="inventory">
-//       </el-table-column>
-//       <el-table-column label="单位" width="50" prop="unit"> </el-table-column>
-//       <el-table-column label="规格" width="140" prop="specification">
-//       </el-table-column>
 </script>
 <style lang='less' scoped>
 //scoped 是局部样式
-
+.app{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
 .allinventory {
-
+width: 100%;
 
   border: 1px solid #36a3f0;
 border-radius: 5px;
@@ -333,6 +314,6 @@ border-radius: 5px;
      height:  40px;
      width: 100%;
   }
-}
+}}
 </style>
 

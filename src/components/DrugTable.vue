@@ -1,5 +1,6 @@
 <!-- 库存查询结果 -->
 <template>
+<div class="app">
   <div class="drugList">
     <div class="topnews">药品库存查询结果</div>
     <el-table :data="tableData" border style="width: 100%" max-height="700px">
@@ -154,7 +155,7 @@
         >
       </span>
     </el-dialog>
-  </div>
+  </div></div>
 </template>
 
 <script>
@@ -250,8 +251,13 @@ export default {
 </script>
 <style lang='less' scoped>
 //scoped 是局部样式
+.app{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
 .drugList{
-
+width: 100%;
   border: 1px solid #36a3f0;
 border-radius: 5px;
  
@@ -262,5 +268,5 @@ border-radius: 5px;
      height:  40px;
      width: 100%;
   }
-}
+}}
 </style>

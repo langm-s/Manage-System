@@ -2,7 +2,7 @@
 <template>
 <div class=''>
   <div class="mylogin">
-    <h1>药品销售管理系统</h1>
+    <h1>药品仓库管理系统</h1>
     <div class="login-area">
       <div class="login-form">
         <el-form :model="form" ref="loginForm" :rules="rules" label-width="80px">
@@ -12,15 +12,21 @@
           <el-form-item label="密码" prop="password">
             <el-input v-model="form.password" placeholder="密码" show-password></el-input>
           </el-form-item>
+          <el-row class="login-checkCode">
+            <el-col :span="16">
+              <el-form-item prop="checkCode" label="验证码" label-width="80px">
+                <el-input v-model="form.checkCode" placeholder="验证码"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="1"></el-col>
+            <el-col :span="5">
+              <el-input v-model="createCheckCode" class="checkCodeInput" :disabled="true"></el-input>
+            </el-col>
+          </el-row>
           <el-form-item label="">
             <el-button type="primary" @click="handleLogin('loginForm')" class="login-button">登录</el-button>
           </el-form-item>
         </el-form>
-      </div>
-      <div class="login-notice">
-        <p>温馨提示</p>
-        <p>未登录过的新用户，自动注册</p>
-        <p>注册过的用户可根据账号密码登录</p>
       </div>
     </div>
   </div>
@@ -38,9 +44,11 @@ components: {},
 data() {
   //这里存放数据
   return {
+    createCheckCode:"",
     form: {
       username:"",
       password:"",
+      checkCode:"",
     },
     rules:{
       username:[
@@ -56,6 +64,13 @@ data() {
           message:"密码不能为空！",
           trigger:"blur"
         }
+      ],
+      checkCode:[
+        {
+          required:true,
+          message:"您还没输入验证码！",
+          trigger:"blur"
+        }
       ]
     }
   };
@@ -66,20 +81,24 @@ computed: {},
 watch: {},
 //方法集合
 methods: {
+  /* 点击登录 */
   handleLogin: function (loginForm) {
     this.$refs[loginForm].validate(async (valid) => {
-      if (valid) {
+      if (valid && this.form.checkCode===this.createCheckCode) {
        let result = await login({
             user_name: this.form.username,
             password: this.form.password,
        });
-       console.log(result);
+      //  console.log(result);
         if (result.status === 1) {
           this.$message({
-          type: "success",
-          message: "登陆成功",
-        })
-        this.$router.push("dashboard")
+            type: "success",
+            message: "登陆成功",
+          });
+          localStorage.setItem("is_login","true");
+          this.$router.push({
+            path:"/dashboard"
+          });
         } else {
           this.$message({
             message: "登录失败",
@@ -91,6 +110,12 @@ methods: {
           type: "warning",
           message: "校验没有成功",
         });
+        let arr = [];
+        for(let i = 0;i<4;i++){
+          arr[i] = Math.floor(Math.random()*10);
+        }
+        this.createCheckCode = arr.join('');
+        this.form.checkCode = "";
       }
     });
   },
@@ -101,7 +126,11 @@ created() {
 },
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
-
+  let arr = [];
+  for(let i = 0;i<4;i++){
+    arr[i] = Math.floor(Math.random()*10);
+  }
+  this.createCheckCode = arr.join('');
 },
 beforeCreate() {}, //生命周期 - 创建之前
 beforeMount() {}, //生命周期 - 挂载之前
@@ -121,7 +150,7 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
   }
   .login-area{
     width: 500px;
-    height: 300px;
+    height: 350px;
     background-color: #ddd;
     margin: 20px auto;
     border-radius: 6px;
@@ -136,6 +165,12 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
       text-align: center;
       color: tomato;
     }
+  }
+  .login-checkCode {
+    display: flex;
+  }
+  .checkCodeInput {
+    font-size: 20px;
   }
   }
 }

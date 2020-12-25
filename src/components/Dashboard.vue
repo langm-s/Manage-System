@@ -12,9 +12,8 @@
             class="dashboard-left"
             router
           >
-            <div class="logo">
-              <img src="../assets/logo.png" alt="" />
-              <h1>药店销售管理系统</h1>
+            <div class="title">
+              <h1>药品仓库管理系统</h1>
             </div>
             <!-- <el-menu-item index="dashboard">
             <i class="el-icon-menu"></i>
@@ -41,7 +40,7 @@
                 <i class="el-icon-s-operation"></i>
                 <span>进货信息</span>
               </template>
-              <el-menu-item index="checkdrug"
+              <el-menu-item index="checkdrugIn"
                 ><i class="el-icon-search"></i>药品审核入库</el-menu-item
               >
               <el-menu-item index="lookrecords"
@@ -73,12 +72,11 @@
             <el-menu-item index="salerecordss"
               ><i class="el-icon-s-order"></i>销售记录</el-menu-item
             >
-            <el-menu-item index="" @click="handlePersonal"
-              ><i class="el-icon-s-order"></i>个人中心</el-menu-item
+             <el-menu-item index="" @click="handlePersonal"
+              ><i class="el-icon-user"></i>个人中心</el-menu-item
             >
           </el-menu>
-
-          <el-drawer
+           <el-drawer
             class="personNews"
             :before-close="handleClose"
             :visible.sync="dialog"
@@ -93,7 +91,7 @@
               <div class="demo-drawer_top">
                 <img
             class="header-right-profile"
-            src="../assets/logo.png"
+            src="../assets/drugApp.jpg"
             alt=""
           />
               </div>
@@ -120,14 +118,18 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-
+//import DrugSell from './components/DrugSell.vue'
+import {getRecordMessage} from '../api/api'
 export default {
   //import引入的组件需要注入到对象中才能使用
-  components: {},
+ name:'App',
+ components: {
+      
+  },
   data() {
     //这里存放数据
     return {
-      defaultActive: "searchdrug",
+      defaultActive: "dashboard",
       form: {},
       dialog: false,
       imageUrl: "",
@@ -138,7 +140,7 @@ export default {
   //监控data中的数据变化
   watch: {},
   //方法集合
-  methods: {
+   methods: {
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
     },
@@ -191,8 +193,20 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
-  mounted() {
-    this.defaultActive = location.hash.split("/")[1];
+  async mounted() {
+    let result = await getRecordMessage();
+    this.$store.commit("purchaseDrug/saveprevRecord",{
+      allRecord:result.data,
+    });
+
+// 进货
+    if (
+      location.hash.slice(2) == "searchAllDrug" ||
+      location.hash.slice(2) == "add_drug_msg"
+    ) {
+      this.defaultActive = "checkdrugIn";
+    }
+    // 库存的
     if (
       location.hash.slice(2) == "adddruglist" ||
       location.hash.slice(2) == "adddrugnews"
@@ -202,11 +216,20 @@ export default {
     if (location.hash.slice(2) == "drugtable") {
       this.defaultActive = "searchinventory";
     }
+    // 基本信息
+    if (location.hash.slice(2) == "drug_details") {
+      this.defaultActive = "dashboard";
+    }
   },
   beforeCreate() {}, //生命周期 - 创建之前
-  beforeMount() {}, //生命周期 - 挂载之前
+  beforeMount() {
+    this.defaultActive = location.hash.slice(2) || "dashboard";
+  }, //生命周期 - 挂载之前
   beforeUpdate() {}, //生命周期 - 更新之前
-  updated() {}, //生命周期 - 更新之后
+  updated() {
+    // this.defaultActive = location.hash.slice(2) || "dashboard";
+
+  }, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
@@ -223,8 +246,8 @@ export default {
   .myadmin-dashboard-col {
     height: 100vh;
   }
-  .personNews {
-    margin-left:300px;
+   .personNews {
+    margin-left:0px;
     width: 400px;
     .demo-drawer_top {
       width: 120px;
@@ -258,12 +281,11 @@ export default {
   }
   .dashboard-left {
     height: 100vh;
-    .logo {
-      height: 200px;
+    .title {
+      height: 120px;
+      line-height: 120px;
       margin: 30px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      color: #fff;
       h1 {
         text-align: center;
       }
