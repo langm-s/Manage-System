@@ -34,7 +34,7 @@
                 <i class="el-icon-s-operation"></i>
                 <span>进货信息</span>
               </template>
-              <el-menu-item index="checkdrug"><i class="el-icon-search"></i>药品审核入库</el-menu-item>
+              <el-menu-item index="checkdrugIn"><i class="el-icon-search"></i>药品审核入库</el-menu-item>
               <el-menu-item index="lookrecords"><i class="el-icon-view"></i>查看供货记录</el-menu-item>
               <el-menu-item index="suppliermannage"><i class="el-icon-user-solid"></i>供货商管理</el-menu-item>
             </el-submenu>

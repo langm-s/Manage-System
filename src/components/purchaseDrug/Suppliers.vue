@@ -121,7 +121,19 @@ methods: {
   },
   // 删除供应商
   handleDeleteSupplier: function(index,row){
-    this.supplierData.splice(index,1);
+    this.$confirm('此操作将删除该项信息, 是否继续?', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }).then(() => {
+      this.supplierData.splice(index,1);
+      this.$message({
+        type: 'success',
+        message: '删除成功!'
+      });
+    });
+    console.log(this.supplierData);
+    // this.supplierData.splice(index,1);
   }
 },
 //生命周期 - 创建完成（可以访问当前this实例）

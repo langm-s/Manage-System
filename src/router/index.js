@@ -41,7 +41,7 @@ const routes = [
       */
     
       {
-        path: "/checkdrug",
+        path: "/checkdrugIn",
         component: () => import ("@/components/purchaseDrug/PurchaseDrug"),
       }, {
           path: "/lookrecords",
@@ -58,27 +58,6 @@ const routes = [
       },
     
     
-      /* 
-        *库存信息模块路由分配
-      */
-      {
-        path: "/searchinventory",
-        // component: () => import ("../components/SearchInventory"),
-      }, {
-          path: "/lookallinventory",
-          // component: () => import ("../components/LookallInventory"),
-      }, {
-          path: "/addinventory",
-          // component: () => import ("../components/AddInventory"),
-      }, 
-      {
-        path: "/warninventory",
-        // component: () => import ( /* webpackChunkName: "warninventory" */ "../components/WarnInventory"),
-      },
-      {
-        path: "/salerecordss",
-        // component: () => import ( /* webpackChunkName: "salerecordss" */ "../components/SaleRecordss"),
-      }
     ]
   },
   
