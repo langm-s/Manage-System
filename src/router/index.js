@@ -8,8 +8,7 @@ let originalPush = VueRouter.prototype.push;
 VueRouter.prototype.push = function(location) {
     return originalPush.call(this, location).catch(() => {});
 };
-const routes = [
-    {
+const routes = [{
         path: '/',
         name: 'Login',
         component: Login
@@ -28,14 +27,23 @@ const routes = [
             component: () =>
                 import ("../components/DrugsSearch")
         }, {
-            path: '/drug-looking',
+            path: '/drug_details',
+            component: () =>
+                import ("../components/DrugDetails")
+        }, {
+            path: '/lookdrug',
             component: () =>
                 import ("../components/DrugLooking")
-        },
-        {
+
+        }, {
+            path: '/adddrug',
+            component: () =>
+                import ("../components/AddDrugs")
+        }, {
             path: '/salerecordss',
             component: () =>
                 import ("../components/DrugSell")
+<<<<<<< HEAD
         },{
             path:'/warninventory',
             component: () =>
@@ -43,12 +51,27 @@ const routes = [
         }
     ]
     }
+=======
+        }]
+    },
+
+>>>>>>> 5480e68b16fb827e58ac0cc0c59fadcf359369f6
 ]
+
+
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes
 })
-
+router.beforeEach(function(to, from, next) {
+    // console.log("全局前置导航守卫");
+    let is_login = localStorage.getItem("is_login");
+    if (is_login || to.path === "/") {
+        next();
+    } else {
+        next("/"); // 否则情况下跳转登陆页面
+    }
+});
 export default router

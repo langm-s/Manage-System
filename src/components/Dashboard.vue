@@ -26,30 +26,53 @@
                 <i class="el-icon-document"></i>
                 <span>药品基础信息</span>
               </template>
-              <el-menu-item index="dashboard"><i class="el-icon-search"></i>搜索药品信息</el-menu-item>
-              <el-menu-item index="lookdrug"><i class="el-icon-view"></i>查看药品信息</el-menu-item>
-              <el-menu-item index="adddrug"><i class="el-icon-document-add"></i>添加药品信息</el-menu-item>
+              <el-menu-item index="dashboard"
+                ><i class="el-icon-search"></i>搜索药品信息</el-menu-item
+              >
+              <el-menu-item index="lookdrug"
+                ><i class="el-icon-view"></i>查看药品信息</el-menu-item
+              >
+              <el-menu-item index="adddrug"
+                ><i class="el-icon-document-add"></i>添加药品信息</el-menu-item
+              >
             </el-submenu>
             <el-submenu index="purchasedata">
               <template slot="title">
                 <i class="el-icon-s-operation"></i>
                 <span>进货信息</span>
               </template>
-              <el-menu-item index="checkdrug"><i class="el-icon-search"></i>药品审核入库</el-menu-item>
-              <el-menu-item index="lookrecords"><i class="el-icon-view"></i>查看供货记录</el-menu-item>
-              <el-menu-item index="suppliermannage"><i class="el-icon-user-solid"></i>供货商管理</el-menu-item>
+              <el-menu-item index="checkdrug"
+                ><i class="el-icon-search"></i>药品审核入库</el-menu-item
+              >
+              <el-menu-item index="lookrecords"
+                ><i class="el-icon-view"></i>查看供货记录</el-menu-item
+              >
+              <el-menu-item index="suppliermannage"
+                ><i class="el-icon-user-solid"></i>供货商管理</el-menu-item
+              >
             </el-submenu>
             <el-submenu index="druginventory">
               <template slot="title">
                 <i class="el-icon-tickets"></i>
                 <span>药品库存信息</span>
               </template>
-              <el-menu-item index="searchinventory"><i class="el-icon-search"></i>库存药品查询</el-menu-item>
-              <el-menu-item index="lookallinventory"><i class="el-icon-view"></i>查看所有库存</el-menu-item>
-              <el-menu-item index="addinventory"><i class="el-icon-circle-plus-outline"></i>新增库存药品</el-menu-item>
+              <el-menu-item index="searchinventory"
+                ><i class="el-icon-search"></i>库存药品查询</el-menu-item
+              >
+              <el-menu-item index="lookallinventory"
+                ><i class="el-icon-view"></i>查看所有库存</el-menu-item
+              >
+              <el-menu-item index="addinventory"
+                ><i class="el-icon-circle-plus-outline"></i
+                >新增库存药品</el-menu-item
+              >
             </el-submenu>
-            <el-menu-item index="warninventory"><i class="el-icon-warning"></i>库存预警</el-menu-item>
-            <el-menu-item index="salerecordss"><i class="el-icon-s-order"></i>销售记录</el-menu-item>
+            <el-menu-item index="warninventory"
+              ><i class="el-icon-warning"></i>库存预警</el-menu-item
+            >
+            <el-menu-item index="salerecordss"
+              ><i class="el-icon-s-order"></i>销售记录</el-menu-item
+            >
           </el-menu>
         </el-col>
         <el-col :span="20" class="myadmin-dashboard-col">
@@ -74,7 +97,7 @@ export default {
   data() {
     //这里存放数据
     return {
-      defaultActive: "searchdrug",
+      defaultActive: "dashboard",
     };
   },
   //监听属性 类似于data概念
@@ -87,12 +110,20 @@ export default {
   created() {},
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
-    this.defaultActive=location.hash.slice(2)||"searchdrug";
+    this.defaultActive = location.hash.slice(2) ;
+    if (location.hash.slice(2) == "drug_details") {
+      this.defaultActive = "dashboard";
+    } 
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
   beforeUpdate() {}, //生命周期 - 更新之前
-  updated() {}, //生命周期 - 更新之后
+  updated() {
+    this.defaultActive = location.hash.slice(2) || "dashboard";
+    if (location.hash.slice(2) == "drug_details") {
+      this.defaultActive = "dashboard";
+    } 
+  }, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
