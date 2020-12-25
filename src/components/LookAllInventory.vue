@@ -1,8 +1,9 @@
 <!-- 查看所有库存 -->
 <template>
   <div class="allinventory">
-    <h1>查看所有的库存</h1>
-    <div class="table">
+   
+    
+    <div class="topnews"> 查看所有的库存</div>
       <el-table :data="tableData" border style="width: 100%" max-height="750px">
         <el-table-column label="药品名称" width="180">
           <template slot-scope="scope">
@@ -163,13 +164,12 @@
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-sizes="pageSizes"
-          :page-size="5"
+          :page-size="10"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
         >
         </el-pagination>
       </div>
-    </div>
   </div>
 </template>
 
@@ -257,7 +257,8 @@ export default {
     // },
 
     deleteRow(index,rows){//删除
-    rows.splice(index,1)
+    rows.splice(index,1);
+    this.total--;
     },
     handleEdit: function (scope) {
       this.dialogVisible = true;
@@ -320,7 +321,18 @@ export default {
 //scoped 是局部样式
 
 .allinventory {
-  text-align: center;
+
+
+  border: 1px solid #36a3f0;
+border-radius: 5px;
+ 
+  .topnews{
+    background-color: #36a3f0;
+    padding-left: 20px;
+    line-height: 40px;
+     height:  40px;
+     width: 100%;
+  }
 }
 </style>
 

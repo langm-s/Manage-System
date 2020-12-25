@@ -67,7 +67,7 @@ const routes = [{
             path: "/adddrugnews",
             component: () =>
                 import ("../components/AddDrugNews")
-        }]
+        }, ]
     },
 ]
 

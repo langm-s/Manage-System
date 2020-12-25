@@ -1,7 +1,10 @@
 <!-- 库存信息查询 -->
 <template>
+<div class="ohell">
   <div class="app">
+   
     <div class="searchinventory">
+    
       <el-row>
         <el-col :span="15">
           <el-autocomplete
@@ -19,9 +22,10 @@
         >查询</el-button
       >
     </div>
-    <!-- <div class="chart">
-      <my-charts :seven-days="sevenDays" :api-data="apiData"></my-charts>
-    </div> -->
+     <div class="chart">
+    <my-charts></my-charts>
+    </div>
+      </div>
   </div>
 </template>
 
@@ -45,11 +49,7 @@ export default {
       flag: false,
       newdrug: "",
       filterResult:[],
-      sevenDays: [], // 最近七天的数据的日期 ['2020-12-15'，'2020-12-16',......'2020-12-21']
-      // sevenDaysDatas[0] 新增注册用户 7天数据 =>
-      // sevenDaysDatas[1] 新增订单 7天数据  =>
-      //  sevenDaysDatas[2] 新增管理员 7天数据
-      apiData: [[], [], []],
+ 
     };
   },
   //监听属性 类似于data概念
@@ -121,15 +121,23 @@ export default {
 </script>
 <style lang='less' scoped>
 //scoped 是局部样式
+.ohell{
+  overflow: hidden;
+}
 .app{
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  margin-top: 100px;
    display: flex;
-  justify-content: center;
+   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   .searchinventory {
  display: flex;
  flex-direction: row;
+ margin-top: 100px;
+ margin-bottom: 60px;
   .inline-input {
     width: 40vw;
   }

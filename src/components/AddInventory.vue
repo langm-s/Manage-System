@@ -2,6 +2,26 @@
 <!--  -->
 <template>
   <div class="app">
+    <div class="top">
+      <h2>药品库存预警品种展示</h2>
+     <el-carousel :interval="4000" type="card" height="300px">
+    <el-carousel-item >
+      <img src="../assets/drug1.jpg" alt="">
+    </el-carousel-item>
+     <el-carousel-item >
+      <img src="../assets/drug2.jpg" alt="">
+    </el-carousel-item> <el-carousel-item >
+      <img src="../assets/drug3.jpg" alt="">
+    </el-carousel-item> <el-carousel-item >
+      <img src="../assets/drug4.jpg" alt="">
+    </el-carousel-item> <el-carousel-item >
+      <img src="../assets/drug5.jpg" alt="">
+    </el-carousel-item> <el-carousel-item >
+      <img src="../assets/drug6.jpg" alt="">
+    </el-carousel-item> <el-carousel-item >
+      <img src="../assets/drug7.jpg" alt="">
+    </el-carousel-item>
+  </el-carousel></div>
     <div class="searchinventory">
       <el-row>
         <el-col :span="15">
@@ -47,11 +67,6 @@ export default {
       drugData:[],
       flag: false,
       newdrug: "",
-      sevenDays: [], // 最近七天的数据的日期 ['2020-12-15'，'2020-12-16',......'2020-12-21']
-      // sevenDaysDatas[0] 新增注册用户 7天数据 =>
-      // sevenDaysDatas[1] 新增订单 7天数据  =>
-      //  sevenDaysDatas[2] 新增管理员 7天数据
-      apiData: [[], [], []],
     };
   },
   //监听属性 类似于data概念
@@ -132,8 +147,34 @@ export default {
   width: 100%;
   height: 100%;
    display: flex;
-  justify-content: center;
+   flex-direction: column;
+  justify-content: flex-start; 
   align-items: center;
+  margin-top: 150px;
+  .top
+
+  {  width: 900px;
+  text-align: center;
+  height: 400px;
+  h2{
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+     .el-carousel__item img {
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+  }
   .searchinventory {
  display: flex;
  flex-direction: row;
