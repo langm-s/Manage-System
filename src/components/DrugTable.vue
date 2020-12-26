@@ -256,16 +256,18 @@ export default {
   width: 100%;
   display: flex;
   align-items: center;
-.drugList{
+.drugList {
 width: 100%;
-  border: 1px solid #36a3f0;
+
+  border: 1px solid #ddd;
 border-radius: 5px;
  
   .topnews{
-    background-color: #36a3f0;
-    padding-left: 20px;
-    line-height: 40px;
-     height:  40px;
+    font-size: 30px;
+    background-color: #ddd;
+    padding-left: 30px;
+    line-height: 90px;
+     height:  90px;
      width: 100%;
   }
 }}

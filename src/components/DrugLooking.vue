@@ -216,10 +216,11 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+
 .lookdrugs {
   h1 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 30px;
   }
 }
 </style>

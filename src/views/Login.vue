@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-<div class=''>
+<div class='app'>
   <div class="mylogin">
     <h1>药品仓库管理系统</h1>
     <div class="login-area">
@@ -13,7 +13,7 @@
             <el-input v-model="form.password" placeholder="密码" show-password></el-input>
           </el-form-item>
           <el-row class="login-checkCode">
-            <el-col :span="16">
+            <el-col :span="18">
               <el-form-item prop="checkCode" label="验证码" label-width="80px">
                 <el-input v-model="form.checkCode" placeholder="验证码"></el-input>
               </el-form-item>
@@ -142,20 +142,24 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 }
 </script>
 <style lang="less" scoped>
+.app{
+  background: url(../assets/background.jpg) no-repeat ;
+  background-size: cover;
 .mylogin {
   padding: 150px;
   height: 100vh;
   h1{
     text-align: center;
+    color: #131313;
   }
   .login-area{
     width: 500px;
-    height: 350px;
-    background-color: #ddd;
-    margin: 20px auto;
+    height: 300px;
+    background-color: rgba(166, 182, 189, 0.6);
+    margin: 40px auto;
     border-radius: 6px;
     .login-form {
-    padding: 30px 80px 10px 10px;
+    padding:35px 80px 17px 10px;
     .login-button {
       width: 100%;
     }
@@ -171,6 +175,7 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
   }
   .checkCodeInput {
     font-size: 20px;
+}
   }
   }
 }

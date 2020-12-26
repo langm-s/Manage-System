@@ -1,6 +1,8 @@
 <!-- 库存查询结果列表 -->
 <template>
-  <div class="">
+<div class="app">
+  <div class="allinventory">
+    <div class="topnews">库存查询结果列表</div>
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column label="药品名称" width="300"  prop="data"> </el-table-column>
       <el-table-column label="厂商" width="260" prop="factory"> </el-table-column>
@@ -17,7 +19,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+    </div>
   </div>
 </template>
 
@@ -71,4 +73,24 @@ export default {
 </script>
 <style lang='less' scoped>
 //scoped 是局部样式
+.app{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+.allinventory {
+width: 100%;
+
+  border: 1px solid #ddd;
+border-radius: 5px;
+ 
+  .topnews{
+    font-size: 30px;
+    background-color: #ddd;
+    padding-left: 30px;
+    line-height: 90px;
+     height:  90px;
+     width: 100%;
+  }
+}}
 </style>
