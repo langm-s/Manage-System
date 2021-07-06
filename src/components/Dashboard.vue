@@ -145,6 +145,21 @@ export default {
       this.dialog = false;
       clearTimeout(this.timer);
     },
+    cancelFormOK: function () {
+      if (this.loading) {
+        return;
+      }
+      this.$confirm("确定要保存修改吗？")
+        .then((_) => {
+          this.timer = setTimeout(() => {
+            // 动画关闭需要一定的时间
+            setTimeout(() => {
+              this.dialog = false;
+            }, 400);
+          }, 1000);
+        })
+        .catch((_) => {});
+    },
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {},

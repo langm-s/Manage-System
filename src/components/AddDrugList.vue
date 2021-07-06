@@ -71,4 +71,24 @@ export default {
 </script>
 <style lang='less' scoped>
 //scoped 是局部样式
+.app{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+.allinventory {
+width: 100%;
+
+  border: 1px solid #ddd;
+border-radius: 5px;
+ 
+  .topnews{
+    font-size: 30px;
+    background-color: #ddd;
+    padding-left: 30px;
+    line-height: 90px;
+     height:  90px;
+     width: 100%;
+  }
+}}
 </style>

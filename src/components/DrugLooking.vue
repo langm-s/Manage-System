@@ -216,12 +216,14 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+
 .lookdrugs {
   h1 {
     color: #fff;
     line-height: 10vh;
     background-color: rgb(59, 108, 131);
     text-align: center;
+    margin-top: 30px;
   }
 }
 </style>
