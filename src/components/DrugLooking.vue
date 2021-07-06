@@ -2,7 +2,7 @@
 <template>
   <div class="lookdrugs">
     <h1>药品基础信息</h1>
-    <el-table :data="filterData" border style="width: 100%" height="90vh">
+    <el-table :data="filterData" border style="width: 100%" height="85vh">
       <el-table-column prop="drugName" label="药品名称" width="180">
       </el-table-column>
       <el-table-column prop="factory" label="厂商"> </el-table-column>
@@ -218,8 +218,10 @@ export default {
 <style lang='less' scoped>
 .lookdrugs {
   h1 {
+    color: #fff;
+    line-height: 10vh;
+    background-color: rgb(59, 108, 131);
     text-align: center;
-    margin-top: 10px;
   }
 }
 </style>

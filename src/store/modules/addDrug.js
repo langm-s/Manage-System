@@ -5,7 +5,6 @@ const addDrug = {
         allDrugs: [],
         //新添药品
         saveDrug: {},
-
     },
     mutations: {
         // 保存更新前的所有药品信息

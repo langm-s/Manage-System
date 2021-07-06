@@ -151,8 +151,10 @@ export default {
 <style lang='less' scoped>
 .adddrug {
   h1 {
+    color: #fff;
+    line-height: 10vh;
+    background-color: rgb(59, 108, 131);
     text-align: center;
-    margin-top: 30px;
   }
   .elform {
     margin: 50px auto;

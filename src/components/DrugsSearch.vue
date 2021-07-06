@@ -1,7 +1,8 @@
 <!--  -->
 <template>
 <div>
-  <top-header></top-header>
+  <!-- <top-header></top-header> -->
+  <h1>搜索药品信息</h1>
   <div class="drug-search">
     
     <!--  <el-input placeholder="请输入药品名称" v-model="inputValue">
@@ -13,11 +14,8 @@
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
       :trigger-on-focus="false"
-      @select="handleSelect"
-    ></el-autocomplete>
-    <el-button slot="append" icon="el-icon-search" @click="handleSearch"
-      >搜索</el-button
-    >
+      @select="handleSelect"></el-autocomplete>
+    <el-button slot="append" icon="el-icon-search" @click="handleSearch">搜索</el-button>
   </div>
 </div>
 </template>
@@ -97,11 +95,17 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+h1 {
+    color: #fff;
+    line-height: 10vh;
+    background-color: rgb(59, 108, 131);
+    text-align: center;
+  }
 .drug-search {
   width: 40vw;
   height: 40px;
-  margin: 0 auto;
-  margin-top: 60px;
+  margin: 100px auto;
+  
   .inline-input {
     width: 35vw;
   }

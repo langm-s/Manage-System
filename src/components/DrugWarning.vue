@@ -1,8 +1,8 @@
 <!--  -->
 <template>
   <div class="">
-    <h2 class="head">库存数量预警</h2>
-    <el-table :data="tableData" height="915" border style="width: 100%">
+    <h1 class="head">库存数量预警</h1>
+    <el-table :data="tableData" height="915" border style="width: 100%;">
       <el-table-column prop="drugName" label="药品名称" width="200">
       </el-table-column>
       <el-table-column prop="factory" label="厂商" width="200">
@@ -62,7 +62,7 @@ export default {
   methods: {
     filterHandler(value, row, column) {
       const property = column["property"];
-      return (row[property] <= Number(value));
+      return row[property] <= Number(value);
     },
   },
 
@@ -83,10 +83,11 @@ export default {
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
 };
 </script>
-<style  scoped>
+<style scoped>
 .head {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 30px;
+  color: #fff;
+  line-height: 10vh;
+  background-color: rgb(59, 108, 131);
+  text-align: center;
 }
 </style>
